@@ -17,3 +17,9 @@ class MyDatabase:
         for k, book in enumerate(cls.books):
             if book.title == title:
                 cls.books[k] = new_book
+
+    @classmethod
+    def delete(cls, title):
+        for k, book in enumerate(cls.books):
+            if book.title == title:
+                cls.books.pop(k)

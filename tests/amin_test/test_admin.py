@@ -1,4 +1,6 @@
-from src.admin.admin_option import create_new_book, update_book
+import pytest
+
+from src.admin.admin_option import create_new_book, update_book, delete_book
 from src.models.base import MyDatabase
 from src.models.book import Book
 
@@ -9,6 +11,26 @@ data = {
     'description': 'description_test',
     'title': 'title_test'
 }
+
+
+# TODO: tests, poder obtener los libros y hacer los cambios por id unico.
+
+@pytest.fixture
+def setup_my_database():
+    MyDatabase.books.clear()
+    yield
+
+
+@pytest.fixture
+def book_created(setup_my_database):
+    book = Book(
+        status=data['status'],
+        category=data['category'],
+        author=data['author'],
+        description=data['description'],
+        title=data['title']
+    )
+    MyDatabase.add(book=book)
 
 
 def test_create_book_success():
@@ -27,15 +49,7 @@ def test_create_book_success():
     assert book_created.title == data['title']
 
 
-def test_update_data_book():
-    book = Book(
-        status=data['status'],
-        category=data['category'],
-        author=data['author'],
-        description=data['description'],
-        title=data['title']
-    )
-    MyDatabase.add(book=book)
+def test_update_data_book_success(book_created):
     new_data = {
         'status': 'not available',
         'category': 'romantic',
@@ -52,3 +66,11 @@ def test_update_data_book():
     assert book_updated.author == new_data['author']
     assert book_updated.description == new_data['description']
     assert book_updated.title == data['title']
+
+# TODO: tests,  si no existe un titulo, si solo quiere actualizar un campo.
+
+
+def test_delete_book_success(book_created):
+    delete_book(title=data['title'])
+    deleted_book = MyDatabase.get(title=data['title'])
+    assert deleted_book is None

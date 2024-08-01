@@ -27,3 +27,8 @@ class BookController:
             book.description = description
             book.modified = datetime.datetime.now()
             self._my_database.update(title=title, new_book=book)
+
+    def delete(self, title):
+        book = self._my_database.get(title=title)
+        if book is not None:
+            self._my_database.delete(title=title)
