@@ -14,6 +14,3 @@ se requiere poder crear, alctualizar, eliminar libros.
 5. Actualizar datos de libro para el admin
 6. Eliminar libros para el admin
 7. Poder obtener un libro de la lista de filtrado
-
-
-> Book(status, category, author, id, name, description)

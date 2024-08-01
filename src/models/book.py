@@ -45,3 +45,23 @@ class Book:
     @property
     def description(self):
         return self._description
+
+    @modified.setter
+    def modified(self, value):
+        self._modified = value
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+
+    @category.setter
+    def category(self, value):
+        self._category = value
+
+    @author.setter
+    def author(self, value):
+        self._author = value
+
+    @description.setter
+    def description(self, value):
+        self._description = value

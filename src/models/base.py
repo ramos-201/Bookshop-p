@@ -11,3 +11,9 @@ class MyDatabase:
             if book.title == title:
                 return book
         return None
+
+    @classmethod
+    def update(cls, title, new_book):
+        for k, book in enumerate(cls.books):
+            if book.title == title:
+                cls.books[k] = new_book
