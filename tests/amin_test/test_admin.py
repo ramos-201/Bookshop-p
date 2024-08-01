@@ -1,6 +1,6 @@
 import pytest
 
-from src.admin.admin_option import create_new_book, update_book, delete_book
+from src.admin_option import create_new_book, update_book, delete_book
 from src.models.base import MyDatabase
 from src.models.book import Book
 
